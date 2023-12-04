@@ -34,9 +34,12 @@ app.get('/currencies/:type', async (req, res) => {
       priceUSD,
     });
   } catch (error) {
+    console.log(error);
     res.send({ isError: true, message: 'it does not support this coin' });
   } finally {
-    await browser.close();
+    if (browser) {
+      await browser.close();
+    }
   }
 });
 
